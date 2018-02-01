@@ -6,4 +6,5 @@ False. Палиндром - это число или текст, который 
 операций ввода-вывода.
 """
 def is_palindrome(s):
-     return True if ''.join(s.split()).lower() == ''.join(s.split()).lower()[::-1] else False
+     ss = str(s) # ignore int
+     return True if ''.join(ss.split()).lower() == ''.join(ss.split()).lower()[::-1] else False
