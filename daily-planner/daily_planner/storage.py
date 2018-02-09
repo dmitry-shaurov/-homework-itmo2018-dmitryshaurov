@@ -32,7 +32,7 @@ def connect(db_name=None):
     return conn
 
 def initialize(conn, creation_script=None):
-    """ Инициализация структура БД"""
+    """ РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃС‚СЂСѓРєС‚СѓСЂР° Р‘Р”"""
     if creation_script is None:
         creation_script = Path.join(Path.dirname(__file__), 'resourses', 'schema.sql')
     with conn, open(creation_script) as f:
@@ -71,9 +71,9 @@ def edit_task(conn, pk, activities=None):
         cursor = conn.cursor()
         cursor = cursor.execute("SELECT COUNT(*) FROM daily_planner")
         if pk > cursor.fetchone()[0]:
-            print("Такой задачи нет")
+            print("РўР°РєРѕР№ Р·Р°РґР°С‡Рё РЅРµС‚")
         else:
-            activities = input("\nЧто будете делать?")
+            activities = input("\nР§С‚Рѕ Р±СѓРґРµС‚Рµ РґРµР»Р°С‚СЊ?")
             cursor = cursor.execute(SQL_UPDATE_A_TASK, (activities, pk))
             print("The task has beed changed")
 
