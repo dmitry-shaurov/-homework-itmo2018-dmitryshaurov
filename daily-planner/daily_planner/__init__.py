@@ -49,7 +49,8 @@ def action_show_tasks_in_table():
     """show all the tasks in the table"""
     due_date = input("За какой день Вы хотите увидеть задачи? (default is today)")
     with get_connection() as conn:
-        storage.show_tasks_in_table(conn, due_date)
+        for row in storage.show_tasks_in_table(conn, due_date):
+            print(row)
 
 
 def action_add_task():
@@ -64,8 +65,10 @@ def action_add_task():
 def action_edit_task():
     """edit a task"""
     pk = int(input("\nВведите задачу, которую Вы хотите отредактировать: "))
+    activities = input("Что будете делать?")
     with get_connection() as conn:
-        storage.edit_task(conn, pk)
+        storage.edit_task(conn, pk,activities)
+    print("The task has beed changed")
 
 def action_finish_task():
     """finishes a task"""
@@ -87,4 +90,5 @@ def action_exit():
 def action_show_all_entries():
     """shows all the table"""
     with get_connection() as conn:
-        storage.show_all_entries(conn)
+        for row in storage.show_all_entries(conn):
+            print(row)

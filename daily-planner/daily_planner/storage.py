@@ -25,7 +25,7 @@ SQL_CHANGE_STATUS_FOR_A_TASK = """
 
 
 def connect(db_name=None):
-    """Connecting to BD""" # comments for documentation
+    """Connecting to BD"""
     if db_name is None:
         db_name = ':memory'
     conn = sqlite3.connect(db_name)
@@ -45,8 +45,7 @@ def show_tasks_in_table(conn, due_date):
     with conn:
         cursor = conn.cursor()
         cursor = cursor.execute(SQL_SELECT_ALL_TASKS, (due_date,))
-    for row in cursor:
-        print(row)
+    return cursor
 
 def add_task(conn, task, activities, due_date):
     """Adds a task to the database"""
@@ -62,20 +61,19 @@ def show_all_entries(conn):
     with conn:
         cursor = conn.cursor()
         cursor = cursor.execute("SELECT * FROM daily_planner")
-    for row in cursor:
-        print(row)
+    return cursor
 
-def edit_task(conn, pk, activities=None):
+
+def edit_task(conn, pk, activities):
     """Edits activities for the current task"""
     with conn:
         cursor = conn.cursor()
         cursor = cursor.execute("SELECT COUNT(*) FROM daily_planner")
         if pk > cursor.fetchone()[0]:
-            print("Такой задачи нет")
+            raise RuntimeError("There is no such task")
         else:
-            activities = input("\nЧто будете делать?")
             cursor = cursor.execute(SQL_UPDATE_A_TASK, (activities, pk))
-            print("The task has beed changed")
+
 
 def finish_task(conn, pk):
     """finishes a task"""
