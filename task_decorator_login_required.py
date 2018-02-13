@@ -22,6 +22,8 @@ def login_required(func):
 def hello():
     print("Hello world!")
 
+
+
 #hello()
 # with open('token.txt', 'w') as f:
 #     f.write(make_token("username", "password"))
