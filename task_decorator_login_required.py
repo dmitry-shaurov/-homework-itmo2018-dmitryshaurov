@@ -18,12 +18,9 @@ def login_required(func):
         return None
     return wrapper
 
-@login_required
-def hello():
-    print("Hello world!")
-
-
-
+#@login_required
+#def hello():
+#    print("Hello world!")
 #hello()
 # with open('token.txt', 'w') as f:
 #     f.write(make_token("username", "password"))
