@@ -18,11 +18,13 @@ import random
 import string
 
 def password_generator(n):
-    pwd = ''
-    for i in range(n):
-        pwd = pwd + random.choice(string.ascii_letters)
-    yield pwd
+    while True:
+        pwd = ''
+        for i in range(n):
+            pwd = pwd + random.choice(string.ascii_letters)
+        yield pwd
 
-# print(password_generator(3))
-# for h in password_generator(3):
-#     print(h, end='')
+# gen = password_generator(20)
+# print(next(gen))
+# print(next(gen))
+# print(next(gen))
