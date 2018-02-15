@@ -19,10 +19,10 @@ import string
 
 def password_generator(n):
     pwd = ''
-    for i in range(n+1):
+    for i in range(n):
         pwd = pwd + random.choice(string.ascii_letters)
     yield pwd
 
-# print(password_generator(100))
-# for h in password_generator(100):
+# print(password_generator(3))
+# for h in password_generator(3):
 #     print(h, end='')
