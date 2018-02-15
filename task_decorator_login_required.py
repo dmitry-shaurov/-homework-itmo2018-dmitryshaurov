@@ -12,8 +12,8 @@ def login_required(func):
         if user_authenticated == False:
             i = 0
             while i < 3 :
-                login = input("\nLogin:")
-                password = input("Password:")
+                login = input()
+                password = input()
                 with open('token.txt') as token:
                     if make_token(login, password) != token.read():
                         i += 1
