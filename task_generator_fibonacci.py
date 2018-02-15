@@ -16,12 +16,12 @@ def fibonacci(n):
     b = 1
     yield 1
     yield 1
-    for i in range(2, n+1):
+    for i in range(2, n):
             f = a + b
             a = b
             b = f
             yield f
 
-# print(type(fibonacci(20)))
-# for j in fibonacci(20):
-#     print(j, end=' ')
+# print(type(fibonacci(3)))
+# for j in fibonacci(3):
+#     print(j, end='  ')
