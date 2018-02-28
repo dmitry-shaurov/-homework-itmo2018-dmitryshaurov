@@ -25,7 +25,7 @@ class Validator(metaclass=ABCMeta):
             raise ValidatorException("Validator must have a name!")
         if not issubclass(klass, Validator):
             raise ValidatorException("Class {} is not Validator!".format(klass))
-        Validator.types[name] = klass #
+        Validator.types[name] = klass 
 
 class EMailValidator(Validator):
     def validate(self, value):
@@ -45,7 +45,10 @@ class DateTimeValidator(Validator):
 # Validator.add_type("email", EMailValidator)
 # Validator.add_type("datetime", DateTimeValidator)
 # valid = Validator.get_instance("datetime")
-# valid.validate("2017-09-01xxx")
-# valid.validate("2017-09-01xx")
-# valid.validate("dmitry.shaurov@gmail.com")
-# valid.validate("dmitry.shaurov")
+# valid = Validator.get_instance("email")
+# valid.validate("1.9.2017")
+# valid.validate("01/09/2017 12:00")
+# valid.validate("2017-09-01 12:00:0111110")
+# valid.validate("2017-09-01 12:00:00")
+# valid.validate("info@itmo-it.org")
+# valid.validate("unknownv")
