@@ -1,9 +1,9 @@
 from abc import ABCMeta, abstractmethod
 
 class CommandException(Exception):
-    # def __init__(self, *args, **kwargs):
-    #     Exception.__init__(self, *args, **kwargs)
-    pass
+    def __init__(self, *args, **kwargs):
+        Exception.__init__(self, *args, **kwargs)
+
 class Command(metaclass=ABCMeta):
     @abstractmethod
     def execute(self, *args, **kwargs):
@@ -47,20 +47,20 @@ class ShowCommand(Command):
     def execute(self):
         pass
 
-class ListCommand():
+class ListCommand(Command):
     def __init__(self):
         pass
     def execute(self):
         pass
 
-
-menu = Menu()
-menu.add_command("show", ShowCommand)
-menu.add_command("list", ListCommand)
-#menu.execute("something")
-
-for name, command in menu:
-    print(name, command)
-
-for item in menu:
-    print(item)
+#
+# menu = Menu()
+# menu.add_command("show", ShowCommand)
+# menu.add_command("list", ListCommand)
+# #menu.execute("something")
+#
+# for name, command in menu:
+#     print(name, command)
+#
+# for item in menu:
+#     print(item)
