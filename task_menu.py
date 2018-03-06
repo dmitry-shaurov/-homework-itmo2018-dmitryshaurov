@@ -18,14 +18,14 @@ class Menu(object):
         if not name:
             raise CommandException("Command must have a name!")
         if not issubclass(klass, Command):
-            raise CommandException("Class {} is not a command!".format(klass))
+            raise CommandException('Class "{}" is not a command!'.format(klass))
         cls.commands[name] = klass
 
     @classmethod
     def execute(cls, name, *args, **kwargs):
         klass = cls.commands.get(name)
         if klass is None:
-            raise CommandException("Command with name {} not found'".format(name))
+            raise CommandException('Command with name "{}" not found'.format(name))
         return klass.execute
 
     def __next__(self):
