@@ -40,7 +40,6 @@ class Menu(object):
     def __iter__(self):
         return self
 
-
 class ShowCommand(Command):
     def __init__(self, task_id):
         pass
