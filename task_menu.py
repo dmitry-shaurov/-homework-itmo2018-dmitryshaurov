@@ -52,14 +52,7 @@ class ListCommand(Command):
     def execute(self):
         pass
 
-#
-# menu = Menu()
-# menu.add_command("show", ShowCommand)
-# menu.add_command("list", ListCommand)
-# #menu.execute("something")
-#
-# for name, command in menu:
-#     print(name, command)
-#
-# for item in menu:
-#     print(item)
+
+menu = Menu()
+menu.add_command("show", ShowCommand)
+menu.add_command("list", ListCommand)
