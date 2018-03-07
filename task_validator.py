@@ -48,7 +48,6 @@ class DateTimeValidator(Validator):
             try:
                 datetime.strptime(value, time)
                 return True
-                break
             except ValueError:
                 pass
         return False
