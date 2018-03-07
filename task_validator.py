@@ -1,6 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from dateutil.parser import parse
-
+from datetime import datetime
 
 class ValidatorException(Exception):
     def __init__(self, *args, **kwargs):
@@ -9,23 +8,23 @@ class ValidatorException(Exception):
 class Validator(metaclass=ABCMeta):
     types = {}
     @abstractmethod
-    def validate(value):
+    def validate(self, *args, **kwargs):
         pass
 
     @classmethod
-    def get_instance(cls, name, *args, **kwargs):
-        klass = cls.types.get(name) #передали имя валидатора, хотим получить объект от сабкласса
+    def get_instance(cls, name):
+        klass = cls.types.get(name)
         if klass is None:
-            raise ValidatorException("Validator with name {} not found'".format(name))
-        return klass(*args, **kwargs) # возвращаем объект дочернего класса-реализатора
+            raise ValidatorException('Validator with name "{}" not found'.format(name))
+        return klass()
 
-    @staticmethod
-    def add_type(name, klass):
+    @classmethod
+    def add_type(cls, name, klass):
         if not name:
             raise ValidatorException("Validator must have a name!")
         if not issubclass(klass, Validator):
-            raise ValidatorException("Class {} is not Validator!".format(klass))
-        Validator.types[name] = klass 
+            raise ValidatorException('Class "{}" is not Validator!'.format(klass))
+        Validator.types[name] = klass
 
 class EMailValidator(Validator):
     def validate(self, value):
@@ -36,19 +35,25 @@ class EMailValidator(Validator):
 
 class DateTimeValidator(Validator):
     def validate(self, value):
-        try:
-            parse(value)
-            return True
-        except ValueError:
-            return False
+        format = {"%Y-%m-%d" : "",
+                  "%Y-%m-%d %H:%M" : "",
+                  "%Y-%m-%d %H:%M:%S" : "",
+                  "%d.%m.%Y" : "",
+                  "%d.%m.%Y %H:%M" : "",
+                  "%d.%m.%Y %H:%M:%S" : "",
+                  "%d/%m/%Y" : "",
+                  "%d/%m/%Y %H:%M" : "",
+                  "%d/%m/%Y %H:%M:%S" : ""}
+        for time in format:
+            try:
+                datetime.strptime(value, time)
+                print(True)
+                break
+            except ValueError:
+                pass
+        print(False)
 
-# Validator.add_type("email", EMailValidator)
-# Validator.add_type("datetime", DateTimeValidator)
-# valid = Validator.get_instance("datetime")
-# valid = Validator.get_instance("email")
-# valid.validate("1.9.2017")
-# valid.validate("01/09/2017 12:00")
-# valid.validate("2017-09-01 12:00:0111110")
-# valid.validate("2017-09-01 12:00:00")
-# valid.validate("info@itmo-it.org")
-# valid.validate("unknownv")
+Validator.add_type('email', EMailValidator)
+Validator.add_type('datetime', DateTimeValidator)
+validator = Validator.get_instance('datetime')
+validator.validate("1.9.201711")
