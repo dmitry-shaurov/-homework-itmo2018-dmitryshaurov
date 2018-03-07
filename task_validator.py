@@ -47,13 +47,11 @@ class DateTimeValidator(Validator):
         for time in format:
             try:
                 datetime.strptime(value, time)
-                print(True)
+                return True
                 break
             except ValueError:
                 pass
-        print(False)
+        return False
 
 Validator.add_type('email', EMailValidator)
 Validator.add_type('datetime', DateTimeValidator)
-validator = Validator.get_instance('datetime')
-validator.validate("1.9.201711")
