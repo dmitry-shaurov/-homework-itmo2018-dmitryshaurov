@@ -95,6 +95,9 @@ class LinkedList(object):
     def __str__(self):
         return str([node for node in self])
 
+    def clear(self):
+        self.__init__()
+
 class LinkedListIterator(object):
     def __init__(self, head):
         assert isinstance(head, Node)
