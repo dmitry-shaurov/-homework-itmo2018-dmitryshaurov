@@ -57,10 +57,3 @@ class ListCommand(Command):
 menu = Menu()
 menu.add_command("show", ShowCommand)
 menu.add_command("list", ListCommand)
-
-
-for i, j in menu:
-    print(i, j)
-
-for i, j in menu:
-    print(i, j)
