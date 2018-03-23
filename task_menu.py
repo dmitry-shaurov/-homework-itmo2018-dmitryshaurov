@@ -26,7 +26,8 @@ class Menu(object):
         klass = cls.commands.get(name)
         if klass is None:
             raise CommandException('Command with name "{}" not found'.format(name))
-        return klass.execute
+        klass.execute(name, *args, **kwargs)
+        return klass.execute(name, *args, **kwargs)
 
     def __next__(self):
         if self.index < len(self.commands.items()):
@@ -56,3 +57,10 @@ class ListCommand(Command):
 menu = Menu()
 menu.add_command("show", ShowCommand)
 menu.add_command("list", ListCommand)
+
+
+for i, j in menu:
+    print(i, j)
+
+for i, j in menu:
+    print(i, j)
